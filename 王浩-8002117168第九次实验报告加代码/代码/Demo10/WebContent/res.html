@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>表单验证</title>	
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <script type="text/javascript" src="js/ajax.js"></script>
+   <script type="text/javascript">
+      function formcheck(){        
+		var url="formcheck";
+		var userid=document.getElementById("userid").value;
+		var userpwd=document.getElementById("userpwd").value;
+		var userpwd_1=document.getElementById("userpwd_1").value;
+		var params="userid="+userid+"&userpwd="+userpwd+"&userpwd_1="+userpwd_1;
+		sendRequest(url,params,'POST',showresult);	
+    }
+    function showresult(){
+        if (httpRequest.readyState == 4) { 
+			if (httpRequest.status == 200) {
+				var info=httpRequest.responseText;
+				document.getElementById("result").innerHTML=info;
+			}
+		}
+}
+</script>
+  </head>
+  <body> 
+    请输入用户名：<input type="text" name="userid" id="userid" onblur="formcheck()"/><span>(字母开头，后跟字母或数字，长度至少6位)</span><br/><br/>
+    请输入密码　：<input type="password" name="userpwd"  id="userpwd"/><span>(由数字组成，长度在6~10位)</span><br/><br/>
+    请再次输入密码　：<input type="password" name="userpwd_1"  id="userpwd_1"/><span>(重复刚才输入的密码)</span><br/><br/>
+    <input type="button" value="注册" onclick="formcheck()"/>
+    <div id="result"></div>    
+  </body>
+</html>
